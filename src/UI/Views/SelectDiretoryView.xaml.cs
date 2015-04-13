@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace NugetCompare.UI
 {
     /// <summary>
-    /// Interaction logic for PackagesView.xaml
+    /// Interaction logic for SelectDiretoryView.xaml
     /// </summary>
-    public partial class PackagesView : UserControl
+    public partial class SelectDiretoryView : UserControl
     {
-        public PackagesView()
+        public SelectDiretoryView()
         {
             InitializeComponent();
         }

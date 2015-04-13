@@ -17,7 +17,7 @@ using System.Collections.ObjectModel;
 // Toolkit namespace
 using SimpleMvvmToolkit;
 
-namespace NugetCompare.UI.Locators
+namespace NugetCompare.UI
 {
     /// <summary>
     /// This class creates ViewModels on demand for Views, supplying a
@@ -44,7 +44,14 @@ namespace NugetCompare.UI.Locators
     /// </summary>
     public class ViewModelLocator
     {
-        // TODO: Use mvvmlocator or mvvmlocatornosa code snippets
         // to add ViewModels to the locator.
+        public MainPageViewModel MainPageViewModel
+        {
+            get { return new MainPageViewModel(); }
+        }
+        public SelectDiretoryView SelectDiretoryView
+        {
+            get { return new SelectDiretoryView(); }
+        }
     }
 }
