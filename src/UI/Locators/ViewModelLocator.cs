@@ -49,9 +49,9 @@ namespace NugetCompare.UI
         {
             get { return new MainPageViewModel(); }
         }
-        public SelectDiretoryView SelectDiretoryView
+        public SelectDiretoryViewModel SelectDiretoryView
         {
-            get { return new SelectDiretoryView(); }
+            get { return new SelectDiretoryViewModel(); }
         }
     }
 }

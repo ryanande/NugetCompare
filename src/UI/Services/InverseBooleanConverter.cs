@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace NugetCompare.UI.Services
+namespace NugetCompare.UI
 {
     /// <summary>
     /// As seen on StackOverflow: http://stackoverflow.com/questions/1039636/how-to-bind-inverse-boolean-properties-in-wpf

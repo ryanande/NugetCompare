@@ -44,6 +44,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleMvvmToolkit-Common">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\SimpleMvvmToolkit-Common.dll</HintPath>
     </Reference>
@@ -53,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -75,12 +79,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Locators\ViewModelLocator.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Services\AsyncDelegateCommand.cs" />
     <Compile Include="Services\ControlNames.cs" />
     <Compile Include="Services\InverseBooleanConverter.cs" />
     <Compile Include="Services\MessageTokens.cs" />
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModel.cs" />
+    <Compile Include="ViewModels\SelectDiretoryViewModel.cs" />
     <Compile Include="Views\PackagesView.xaml.cs">
       <DependentUpon>PackagesView.xaml</DependentUpon>
     </Compile>
@@ -147,9 +154,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="app.ico" />
   </ItemGroup>
