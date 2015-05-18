@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NugetCompare.UI.Services
+﻿namespace NugetCompare.UI.Services
 {
-    public interface IIOService
+    using System.Collections.Generic;
+
+    public interface IPackageService
     {
-        string OpenFileDialog(string defaultPath);
+        IEnumerable<string> LoadDependencies(string path);
     }
 
-    public class IOService : IIOService
+    public class PackageService : IPackageService
     {
-        public string OpenFileDialog(string defaultPath)
+
+        public IEnumerable<string> LoadDependencies(string path)
         {
-            
+            // find all packages.config in the dir/ recursive
+
+            // foreach file
+
+            // 
 
 
+            return new List<string>();
         }
     }
 }

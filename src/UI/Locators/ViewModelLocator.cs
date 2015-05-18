@@ -51,7 +51,7 @@ namespace NugetCompare.UI
         }
         public SelectDiretoryViewModel SelectDiretoryViewModel
         {
-            get { return new SelectDiretoryViewModel(); }
+            get { return new SelectDiretoryViewModel(new PackageService()); }
         }
     }
 }

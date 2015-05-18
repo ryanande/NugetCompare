@@ -5,6 +5,7 @@ using SimpleMvvmToolkit;
 namespace NugetCompare.UI
 {
     using System.Threading;
+    using Services;
 
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -20,6 +21,8 @@ namespace NugetCompare.UI
         public event EventHandler<NotificationEventArgs> ScanStarted;
         public event EventHandler<NotificationEventArgs> ScanComplete;
         public event EventHandler<NotificationEventArgs> OpenBrowse;
+
+        private readonly IPackageService _packageService;
 
         private ICommand _scanCommand;
         public ICommand ScanCommand
@@ -56,8 +59,9 @@ namespace NugetCompare.UI
             }
         }
 
-        public SelectDiretoryViewModel()
+        public SelectDiretoryViewModel(IPackageService packageService)
         {
+            _packageService = packageService;
             Model = new Setting();
         }
 
@@ -69,6 +73,8 @@ namespace NugetCompare.UI
         public void Scan()
         {
             Scanning = true;
+
+            _packageService.LoadDependencies("");
             Thread.Sleep(5000);
         }
 

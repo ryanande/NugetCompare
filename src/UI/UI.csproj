@@ -83,6 +83,7 @@
     <Compile Include="Services\AsyncDelegateCommand.cs" />
     <Compile Include="Services\ControlNames.cs" />
     <Compile Include="Services\InverseBooleanConverter.cs" />
+    <Compile Include="Services\IOService.cs" />
     <Compile Include="Services\MessageTokens.cs" />
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
