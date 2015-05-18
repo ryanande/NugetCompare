@@ -4,6 +4,7 @@ using SimpleMvvmToolkit;
 
 namespace NugetCompare.UI
 {
+    using System.Threading;
 
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -16,17 +17,17 @@ namespace NugetCompare.UI
 
 
         public event EventHandler<NotificationEventArgs<Exception>> ErrorNotice;
-        public event EventHandler<NotificationEventArgs> GenerationStarted;
-        public event EventHandler<NotificationEventArgs> GenerateComplete;
+        public event EventHandler<NotificationEventArgs> ScanStarted;
+        public event EventHandler<NotificationEventArgs> ScanComplete;
         public event EventHandler<NotificationEventArgs> OpenBrowse;
 
-        private ICommand _generateCommand;
-        public ICommand GenerateCommand
+        private ICommand _scanCommand;
+        public ICommand ScanCommand
         {
             get {
-                return _generateCommand ??
-                       (_generateCommand =
-                           new AsyncDelegateCommand(Generate, null, s => GenerateCompleted(),
+                return _scanCommand ??
+                       (_scanCommand =
+                           new AsyncDelegateCommand(Scan, null, s => ScanCompleted(),
                                ex => NotifyError(ex.Message, ex)));
             }
         }
@@ -41,18 +42,23 @@ namespace NugetCompare.UI
         }
 
 
-        private bool _generating;
-        public bool Generating
+        private bool _scanning;
+        public bool Scanning
         {
             get
             {
-                return _generating;
+                return _scanning;
             }
             set
             {
-                _generating = value;
-                NotifyPropertyChanged(m => m.Generating);
+                _scanning = value;
+                NotifyPropertyChanged(m => m.Scanning);
             }
+        }
+
+        public SelectDiretoryViewModel()
+        {
+            Model = new Setting();
         }
 
         public void Browse()
@@ -60,15 +66,16 @@ namespace NugetCompare.UI
             Notify(OpenBrowse, new NotificationEventArgs());
         }
 
-        public void Generate()
+        public void Scan()
         {
-            
+            Scanning = true;
+            Thread.Sleep(5000);
         }
 
 
-        private void GenerateCompleted()
+        private void ScanCompleted()
         {
-            Generating = false;
+            Scanning = false;
 
         }
         
