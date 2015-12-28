@@ -7,7 +7,7 @@
              xmlns:ui="clr-namespace:NugetCompare.UI"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
-             d:DesignWidth="300"
+             d:DesignWidth="500"
              DataContext="{Binding Source={StaticResource Locator}, Path=SelectDiretoryViewModel}">
     <UserControl.Resources>
         <ui:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -30,6 +30,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -64,5 +65,19 @@
                                Width="50"
                                Height="50"
                                IsActive="{Binding Scanning}" />
+        <controls:MetroAnimatedTabControl Grid.Row="3"
+                                          Grid.ColumnSpan="5"
+                                          HorizontalAlignment="Left"
+                                          Margin="5">
+            <TabItem Header="List">
+                <Label Content="Content goes here... 1" />
+            </TabItem>
+            <TabItem Header="Shared">
+                <Label Content="Content goes here... 2" />
+            </TabItem>
+            <TabItem Header="Conflicts">
+                <Label Content="Content goes here... 3" />
+            </TabItem>
+        </controls:MetroAnimatedTabControl>
     </Grid>
 </UserControl>

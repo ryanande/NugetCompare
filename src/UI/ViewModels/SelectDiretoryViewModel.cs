@@ -5,7 +5,6 @@ using SimpleMvvmToolkit;
 namespace NugetCompare.UI
 {
     using System.Threading;
-    using Services;
 
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -36,13 +35,7 @@ namespace NugetCompare.UI
         }
 
 
-        public ICommand BrowseCommand
-        {
-            get
-            {
-                return new DelegateCommand(Browse);
-            }
-        }
+        public ICommand BrowseCommand => new DelegateCommand(Browse);
 
 
         private bool _scanning;
@@ -74,7 +67,7 @@ namespace NugetCompare.UI
         {
             Scanning = true;
 
-            _packageService.LoadDependencies("");
+            var packages = _packageService.LoadDependencies(Model.SearchDirectory);
             Thread.Sleep(5000);
         }
 
