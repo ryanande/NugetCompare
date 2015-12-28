@@ -76,7 +76,7 @@
                 <Label Content="Content goes here... 2" />
             </TabItem>
             <TabItem Header="Conflicts">
-                <Label Content="Content goes here... 3" />
+                <Label Content="Content goes here... 3a" />
             </TabItem>
         </controls:MetroAnimatedTabControl>
     </Grid>
