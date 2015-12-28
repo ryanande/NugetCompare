@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using SimpleMvvmToolkit;
 
 namespace NugetCompare.UI
 {
     public interface IPackageService
     {
-        List<PackageConfig> LoadDependencies(string val);
+        ObservableCollection<PackageConfig> LoadDependencies(string val);
     }
 
     public class PackageService : IPackageService
@@ -16,7 +18,7 @@ namespace NugetCompare.UI
 
         private const string PackagesConfigFileName = "packages.config";
 
-        public List<PackageConfig> LoadDependencies(string val)
+        public ObservableCollection<PackageConfig> LoadDependencies(string val)
         {
 
             if (!Directory.Exists(val))
@@ -34,12 +36,12 @@ namespace NugetCompare.UI
                 Packages = GetPackages(fullPackagePath),
                 Directory = Path.GetFullPath(fullPackagePath),
                 ProjectFile = FindProjectFile(Path.GetDirectoryName(fullPackagePath))
-            }).ToList();
+            }).ToObservableCollection();
         }
 
-        private List<Package> GetPackages(string path)
+        private ObservableCollection<Package> GetPackages(string path)
         {
-            var packages = new List<Package>();
+            var packages = new ObservableCollection<Package>();
             using (var reader = XmlReader.Create(path))
             {
                 while (reader.Read())
@@ -76,31 +78,10 @@ namespace NugetCompare.UI
             var file = Directory.EnumerateFiles(path).SingleOrDefault(f => f.EndsWith(".csproj"));
             return Path.GetFileName(file);
         }
-    }
-
-
-    public class Package
-    {
-        public string Name { get; set; }
-        public string Version { get; set; }
 
     }
 
-    public class PackageConfig
-    {
-        public PackageConfig()
-        {
-            Packages = new List<Package>();
-        }
 
-        public List<Package> Packages { get; set; }
-        public string Directory { get; set; }
-        public string ProjectFile { get; set; }
-
-        public string ProjectName()
-        {
-            return !string.IsNullOrWhiteSpace(ProjectFile) || ProjectFile.Contains(".") ? ProjectFile.Split('.')[0] : string.Empty;
-        }
-    }
+   
 
 }

@@ -67,7 +67,8 @@ namespace NugetCompare.UI
         {
             Scanning = true;
 
-            var packages = _packageService.LoadDependencies(Model.SearchDirectory);
+            // here I would typically like to use automapper to map from a domain obj to a ModelBase (service shouldn't know UI stuff)
+            Model.Packages = _packageService.LoadDependencies(Model.SearchDirectory);
             Thread.Sleep(5000);
         }
 
