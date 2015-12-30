@@ -10,7 +10,7 @@ namespace NugetCompare.UI
 {
     public interface IPackageService
     {
-        ObservableCollection<PackageConfig> LoadDependencies(string val);
+        ObservableCollection<Project> LoadDependencies(string val);
     }
 
     public class PackageService : IPackageService
@@ -18,7 +18,7 @@ namespace NugetCompare.UI
 
         private const string PackagesConfigFileName = "packages.config";
 
-        public ObservableCollection<PackageConfig> LoadDependencies(string val)
+        public ObservableCollection<Project> LoadDependencies(string val)
         {
 
             if (!Directory.Exists(val))
@@ -31,7 +31,7 @@ namespace NugetCompare.UI
             if (!locatedPackages.Any())
                 return null;
 
-            return locatedPackages.Select(fullPackagePath => new PackageConfig
+            return locatedPackages.Select(fullPackagePath => new Project
             {
                 Packages = GetPackages(fullPackagePath),
                 Directory = Path.GetFullPath(fullPackagePath),

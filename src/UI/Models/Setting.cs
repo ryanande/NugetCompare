@@ -19,14 +19,14 @@ namespace NugetCompare.UI
             }
         }
 
-        private ObservableCollection<PackageConfig> _packages;
-        public ObservableCollection<PackageConfig> Packages
+        private ObservableCollection<Project> _projects;
+        public ObservableCollection<Project> Projects
         {
-            get { return _packages; }
+            get { return _projects; }
             set
             {
-                _packages = value;
-                NotifyPropertyChanged(m => m.Packages);
+                _projects = value;
+                NotifyPropertyChanged(m => m.Projects);
             }
         }
     }
@@ -57,13 +57,13 @@ namespace NugetCompare.UI
         }
     }
 
-    public class PackageConfig : ModelBase<PackageConfig>
+    public class Project : ModelBase<Project>
     {
         private ObservableCollection<Package> _packages;
         private string _directory;
         private string _projectFile;
 
-        public PackageConfig()
+        public Project()
         {
             Packages = new ObservableCollection<Package>();
         }

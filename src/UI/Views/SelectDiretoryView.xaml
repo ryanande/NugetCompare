@@ -52,14 +52,15 @@
                 Grid.Column="3" 
                 Content="Browse" 
                 Command="{Binding BrowseCommand}"></Button>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}"
+        <Button Style="{StaticResource AccentedSquareButtonStyle }"
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
                 Content="Scan Packages" 
                 Command="{Binding ScanCommand}"></Button>
         <controls:ProgressRing Grid.Row="3"
-                               Grid.ColumnSpan="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="4" 
                                HorizontalAlignment="Center"
                                Margin="5"
                                Width="50"
@@ -72,20 +73,57 @@
                                           Grid.Column="0"
                                           Grid.ColumnSpan="4">
             <TabItem Header="List">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DataGrid AutoGenerateColumns="False"
-                              Height="200"
-                              ItemsSource="{Binding Path=Model.Packages }"
-                              ScrollViewer.CanContentScroll="True"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"
-                              ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Project" Binding="{ Binding ProjectName }"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <!--<DataGrid ItemsSource="{Binding Model.Projects }" AutoGenerateColumns="False">
+                   
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Project" Binding="{Binding ProjectName}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            
+                            <DataGrid ItemsSource="{Binding }" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Package" Binding="{Binding Name}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Version" Binding="{Binding Version}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
                     
-                </ScrollViewer>
+                </DataGrid>-->
+                <ListView ItemsSource="{ Binding Model.Projects }">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+
+                                <TextBlock Text="{ Binding ProjectName }" 
+                                           FontWeight="Bold"
+                                           />
+                                <DataGrid ItemsSource="{Binding Packages}"
+                                          AutoGenerateColumns="False"
+                                          EnableRowVirtualization="false" 
+                                          EnableColumnVirtualization="false"
+                                          CanUserAddRows="False" 
+                                          CanUserReorderColumns="False"
+                                          ColumnWidth="Auto"
+                                          HorizontalAlignment="Left">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Name}"
+                                                            Header="Package"></DataGridTextColumn>
+                                        <DataGridTextColumn Binding="{Binding Version}"
+                                                            Header="Version"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
             </TabItem>
             <TabItem Header="Shared">
                 <Label Content="Content goes here... 2" />
