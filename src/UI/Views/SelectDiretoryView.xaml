@@ -69,61 +69,59 @@
 
 
         <controls:MetroAnimatedTabControl Margin="5" 
-                                          Grid.Row="3"
+                                          Grid.Row="4"
                                           Grid.Column="0"
                                           Grid.ColumnSpan="4">
-            <TabItem Header="List">
+            <TabItem Header="Projects">
 
-                <!--<DataGrid ItemsSource="{Binding Model.Projects }" AutoGenerateColumns="False">
-                   
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Project" Binding="{Binding ProjectName}"></DataGridTextColumn>
-                    </DataGrid.Columns>
+                <StackPanel>
+                    <!--<ComboBox ItemsSource="{Binding Model.Projects }"
+                              IsEditable="True"
+                              IsTextSearchCaseSensitive="False"
+                              IsTextSearchEnabled="True"
+                              DisplayMemberPath="ProjectName"
+                              Margin="10">
+                        
+                    </ComboBox>-->
 
-                    <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            
-                            <DataGrid ItemsSource="{Binding }" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Package" Binding="{Binding Name}"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Version" Binding="{Binding Version}"></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
-                    
-                </DataGrid>-->
-                <ListView ItemsSource="{ Binding Model.Projects }">
+                    <ListView ItemsSource="{ Binding Model.Projects }"
+                              Height="300">
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <StackPanel>
+                                        <TextBlock Text="{ Binding ProjectName }"
+                                                   FontWeight="Bold"
+                                                   FontSize="18"
+                                                   Margin="5"/>
+                                        <DataGrid ItemsSource="{Binding Packages}"
+                                                  AutoGenerateColumns="False"
+                                                  EnableRowVirtualization="false"
+                                                  EnableColumnVirtualization="false"
+                                                  CanUserAddRows="False"
+                                                  CanUserReorderColumns="False"
+                                                  HorizontalAlignment="Center">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{Binding Name}"
+                                                                    Header="Package"
+                                                                    MinWidth="250" 
+                                                                    Width="*"></DataGridTextColumn>
+                                                <DataGridTextColumn Binding="{Binding Version}"
+                                                                    Header="Version"
+                                                                    MinWidth="150" 
+                                                                    Width="Auto"></DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </ScrollViewer>
 
-                                <TextBlock Text="{ Binding ProjectName }" 
-                                           FontWeight="Bold"
-                                           />
-                                <DataGrid ItemsSource="{Binding Packages}"
-                                          AutoGenerateColumns="False"
-                                          EnableRowVirtualization="false" 
-                                          EnableColumnVirtualization="false"
-                                          CanUserAddRows="False" 
-                                          CanUserReorderColumns="False"
-                                          ColumnWidth="Auto"
-                                          HorizontalAlignment="Left">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Name}"
-                                                            Header="Package"></DataGridTextColumn>
-                                        <DataGridTextColumn Binding="{Binding Version}"
-                                                            Header="Version"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-                            </StackPanel>
-
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-
-                </ListView>
+                    </ListView>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Shared">
                 <Label Content="Content goes here... 2" />

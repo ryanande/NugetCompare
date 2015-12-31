@@ -4,7 +4,6 @@ using SimpleMvvmToolkit;
 
 namespace NugetCompare.UI
 {
-    using System.Threading;
 
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -17,8 +16,6 @@ namespace NugetCompare.UI
 
 
         public event EventHandler<NotificationEventArgs<Exception>> ErrorNotice;
-        public event EventHandler<NotificationEventArgs> ScanStarted;
-        public event EventHandler<NotificationEventArgs> ScanComplete;
         public event EventHandler<NotificationEventArgs> OpenBrowse;
 
         private readonly IPackageService _packageService;
