@@ -3,7 +3,7 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       DataContext="{Binding Source={StaticResource Locator}, Path=MainPageViewModel}"
-                      Title="Inglorious Nuget Compare" 
+                      Title="Inglorious Nuget Comparer" 
                       Height="550" 
                       Width="650" 
                       Icon="/NugetCompare.UI;component/app.ico"
