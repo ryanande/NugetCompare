@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace NugetCompare.UI
+﻿namespace NugetCompare.UI
 {
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using SimpleMvvmToolkit;
+
 
     public class Setting : ModelBase<Setting>
     {
@@ -20,6 +20,8 @@ namespace NugetCompare.UI
         }
 
         private ObservableCollection<Project> _projects;
+        private ObservableCollection<SharedPackage> _sharedPackages;
+
         public ObservableCollection<Project> Projects
         {
             get { return _projects; }
@@ -29,7 +31,18 @@ namespace NugetCompare.UI
                 NotifyPropertyChanged(m => m.Projects);
             }
         }
+
+        public ObservableCollection<SharedPackage> SharedPackages
+        {
+            get { return _sharedPackages; }
+            set {
+                _sharedPackages = value;
+                NotifyPropertyChanged(m => m.SharedPackages);
+            }
+        }
     }
+
+
 
     public class Package : ModelBase<Package>
     {
@@ -106,6 +119,38 @@ namespace NugetCompare.UI
                     ? ProjectFile.Replace(".csproj", "")
                     : string.Empty;
             }
+        }
+    }
+
+    public class SharedPackage : ModelBase<SharedPackage>
+    {
+        private string _name;
+        private ObservableCollection<ProjectPackageVersion> _projectPackage;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged(m => m.Name);
+            }
+        }
+
+        public ObservableCollection<ProjectPackageVersion> ProjectPackage
+        {
+            get { return _projectPackage; }
+            set
+            {
+                _projectPackage = value;
+                NotifyPropertyChanged(m => m.ProjectPackage);
+            }
+        }
+
+        public class ProjectPackageVersion
+        {
+            public string ProjectName { get; set; }
+            public string Version { get; set; }
         }
     }
 }

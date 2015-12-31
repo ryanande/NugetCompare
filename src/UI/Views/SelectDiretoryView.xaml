@@ -78,7 +78,7 @@
             <TabItem Header="Projects">
 
                 <StackPanel>
-                    <!--<ComboBox ItemsSource="{Binding Model.Projects }"
+                    <!--<ComboBox ItemsSource="{ Binding Model.Projects }"
                               IsEditable="True"
                               IsTextSearchCaseSensitive="False"
                               IsTextSearchEnabled="True"
@@ -127,7 +127,46 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Shared">
-                <Label Content="Content goes here... 2" />
+                <StackPanel>
+
+                    <ListView ItemsSource="{ Binding Model.SharedPackages }"
+                              Height="300">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <StackPanel>
+                                        <TextBlock Text="{ Binding Name }"
+                                                   FontWeight="Bold"
+                                                   FontSize="18"
+                                                   Margin="5"/>
+                                        <DataGrid ItemsSource="{Binding ProjectPackage}"
+                                                  AutoGenerateColumns="False"
+                                                  EnableRowVirtualization="false"
+                                                  EnableColumnVirtualization="false"
+                                                  CanUserAddRows="False"
+                                                  CanUserReorderColumns="False"
+                                                  HorizontalAlignment="Center">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{Binding ProjectName}"
+                                                                    Header="Package"
+                                                                    MinWidth="250" 
+                                                                    Width="*"></DataGridTextColumn>
+                                                <DataGridTextColumn Binding="{Binding Version}"
+                                                                    Header="Version"
+                                                                    MinWidth="150" 
+                                                                    Width="Auto"></DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Conflicts">
                 <Label Content="Content goes here... 3a" />
