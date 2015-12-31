@@ -10,7 +10,9 @@
              d:DesignWidth="500"
              DataContext="{Binding Source={StaticResource Locator}, Path=SelectDiretoryViewModel}">
     <UserControl.Resources>
-        <ui:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ui:BoolToVisibilityConverter x:Key="ReverseBoolToVisibilityConverter" 
+                                      TrueValue="Hidden" 
+                                      FalseValue="Visible" />
     </UserControl.Resources>
     <Grid>
         <Grid.Resources>
@@ -69,9 +71,10 @@
 
 
         <controls:MetroAnimatedTabControl Margin="5" 
-                                          Grid.Row="4"
+                                          Grid.Row="3"
                                           Grid.Column="0"
-                                          Grid.ColumnSpan="4">
+                                          Grid.ColumnSpan="4"
+                                          Visibility="{Binding Scanning, Converter={StaticResource ReverseBoolToVisibilityConverter}}">
             <TabItem Header="Projects">
 
                 <StackPanel>
