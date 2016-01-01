@@ -67,9 +67,9 @@ namespace NugetCompare.UI
             Scanning = true;
 
             // here I would typically like to use automapper to map from a domain obj to a ModelBase (service shouldn't know UI stuff)
-            Model.Projects = _packageService.LoadProjects(Model.SearchDirectory).ToObservableCollection();
+            Model.Projects = _packageService.GetProjects(Model.SearchDirectory).ToObservableCollection();
             Model.SharedPackages = _packageService.GetSharedPackages(Model.SearchDirectory).ToObservableCollection();
-            
+            Model.Solutions = _packageService.GetSolutions(Model.SearchDirectory).ToObservableCollection();
             //Thread.Sleep(5000);
         }
 

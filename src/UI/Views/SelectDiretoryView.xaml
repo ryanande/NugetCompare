@@ -86,7 +86,14 @@
                               Margin="10">
                         
                     </ComboBox>-->
-
+                    <TextBlock Margin="5,0,0,5">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Solutions {0} Projects {1}">
+                                <Binding Path="Model.Solutions.Count" />
+                                <Binding Path="Model.Projects.Count" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <ListView ItemsSource="{ Binding Model.Projects }"
                               Height="300">
 

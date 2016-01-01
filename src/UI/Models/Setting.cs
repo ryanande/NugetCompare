@@ -8,6 +8,9 @@
     public class Setting : ModelBase<Setting>
     {
         private string _searchDirectory;
+        private ObservableCollection<Project> _projects;
+        private ObservableCollection<SharedPackage> _sharedPackages;
+        private ObservableCollection<string> _solutions;
 
         public string SearchDirectory
         {
@@ -19,8 +22,15 @@
             }
         }
 
-        private ObservableCollection<Project> _projects;
-        private ObservableCollection<SharedPackage> _sharedPackages;
+        public ObservableCollection<string> Solutions
+        {
+            get { return _solutions; }
+            set
+            {
+                _solutions = value;
+                NotifyPropertyChanged(m => m.Solutions);
+            }
+        }
 
         public ObservableCollection<Project> Projects
         {
@@ -35,7 +45,8 @@
         public ObservableCollection<SharedPackage> SharedPackages
         {
             get { return _sharedPackages; }
-            set {
+            set
+            {
                 _sharedPackages = value;
                 NotifyPropertyChanged(m => m.SharedPackages);
             }

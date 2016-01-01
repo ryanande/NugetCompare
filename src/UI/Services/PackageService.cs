@@ -9,8 +9,9 @@ namespace NugetCompare.UI
 {
     public interface IPackageService
     {
-        List<Project> LoadProjects(string path);
+        List<Project> GetProjects(string path);
         List<SharedPackage> GetSharedPackages(string path);
+        IEnumerable<string> GetSolutions(string path);
     }
 
     public class PackageService : IPackageService
@@ -18,7 +19,7 @@ namespace NugetCompare.UI
         private const string PackagesConfigFileName = "packages.config";
         private List<Project> _projects; 
 
-        public List<Project> LoadProjects(string path)
+        public List<Project> GetProjects(string path)
         {
 
             if (!Directory.Exists(path))
@@ -43,7 +44,7 @@ namespace NugetCompare.UI
         public List<SharedPackage> GetSharedPackages(string path)
         {
             // no me gusta
-            var projects = LoadProjects(path).SelectMany(b => b.Packages.Select(c => new { c.Name, c.Version, b.ProjectName }));
+            var projects = GetProjects(path).SelectMany(b => b.Packages.Select(c => new { c.Name, c.Version, b.ProjectName }));
 
             return (from item in projects.GroupBy(grp => grp.Name).Select(s => s.Key)
                     where projects.Count(w => w.Name == item) > 1
@@ -56,7 +57,15 @@ namespace NugetCompare.UI
                             Version = s.Version
                         }).ToObservableCollection()
                     }).ToList();
-        } 
+        }
+
+
+        public IEnumerable<string> GetSolutions(string path)
+        {
+            var solutions = Directory.EnumerateFiles(path, "*.sln", SearchOption.AllDirectories);
+            return solutions;
+        }
+
 
         private ObservableCollection<Package> GetPackages(string path)
         {
@@ -91,6 +100,7 @@ namespace NugetCompare.UI
 
             return files;
         }
+ 
 
         private string FindProjectFile(string path)
         {
