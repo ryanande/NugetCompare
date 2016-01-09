@@ -76,104 +76,95 @@
                                           Grid.ColumnSpan="4"
                                           Visibility="{Binding Scanning, Converter={StaticResource ReverseBoolToVisibilityConverter}}">
             <TabItem Header="Projects">
-
-                <StackPanel>
-                    <!--<ComboBox ItemsSource="{ Binding Model.Projects }"
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Margin="5,0,0,5">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="Solutions {0} Projects {1}">
+                                    <Binding Path="Model.Solutions.Count" />
+                                    <Binding Path="Model.Projects.Count" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <!--<ComboBox ItemsSource="{ Binding Model.Projects }"
                               IsEditable="True"
                               IsTextSearchCaseSensitive="False"
                               IsTextSearchEnabled="True"
                               DisplayMemberPath="ProjectName"
                               Margin="10">
-                        
-                    </ComboBox>-->
-                    <TextBlock Margin="5,0,0,5">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="Solutions {0} Projects {1}">
-                                <Binding Path="Model.Solutions.Count" />
-                                <Binding Path="Model.Projects.Count" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <ListView ItemsSource="{ Binding Model.Projects }"
-                              Height="300">
-
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                              VerticalScrollBarVisibility="Auto">
-                                    <StackPanel>
-                                        <TextBlock Text="{ Binding ProjectName }"
-                                                   FontWeight="Bold"
-                                                   FontSize="18"
-                                                   Margin="5"/>
-                                        <DataGrid ItemsSource="{Binding Packages}"
-                                                  AutoGenerateColumns="False"
-                                                  EnableRowVirtualization="false"
-                                                  EnableColumnVirtualization="false"
-                                                  CanUserAddRows="False"
-                                                  CanUserReorderColumns="False"
-                                                  HorizontalAlignment="Center">
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Binding="{Binding Name}"
-                                                                    Header="Package"
-                                                                    MinWidth="250" 
-                                                                    Width="*"></DataGridTextColumn>
-                                                <DataGridTextColumn Binding="{Binding Version}"
-                                                                    Header="Version"
-                                                                    MinWidth="150" 
-                                                                    Width="Auto"></DataGridTextColumn>
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </StackPanel>
-                                </ScrollViewer>
-
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-
-                    </ListView>
-                </StackPanel>
+                        </ComboBox>-->
+                        <ItemsControl ItemsSource="{ Binding Model.Projects }">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding ProjectName}" />
+                                        <ItemsControl Grid.Column="1" 
+                                                      ItemsSource="{ Binding Packages }">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,0,0,5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{ Binding Name }"></TextBlock>
+                                                        <TextBlock Text="{ Binding Version }"
+                                                                   Grid.Column="1"></TextBlock>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Shared">
-                <StackPanel>
-
-                    <ListView ItemsSource="{ Binding Model.SharedPackages }"
-                              Height="300">
-
-                        <ListView.ItemTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                
+                        <!--<ComboBox ItemsSource="{ Binding Model.Projects }"
+                              IsEditable="True"
+                              IsTextSearchCaseSensitive="False"
+                              IsTextSearchEnabled="True"
+                              DisplayMemberPath="ProjectName"
+                              Margin="10">
+                        </ComboBox>-->
+                    <ItemsControl ItemsSource="{ Binding Model.SharedPackages }">
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                              VerticalScrollBarVisibility="Auto">
-                                    <StackPanel>
-                                        <TextBlock Text="{ Binding Name }"
-                                                   FontWeight="Bold"
-                                                   FontSize="18"
-                                                   Margin="5"/>
-                                        <DataGrid ItemsSource="{Binding ProjectPackage}"
-                                                  AutoGenerateColumns="False"
-                                                  EnableRowVirtualization="false"
-                                                  EnableColumnVirtualization="false"
-                                                  CanUserAddRows="False"
-                                                  CanUserReorderColumns="False"
-                                                  HorizontalAlignment="Center">
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Binding="{Binding ProjectName}"
-                                                                    Header="Package"
-                                                                    MinWidth="250" 
-                                                                    Width="*"></DataGridTextColumn>
-                                                <DataGridTextColumn Binding="{Binding Version}"
-                                                                    Header="Version"
-                                                                    MinWidth="150" 
-                                                                    Width="Auto"></DataGridTextColumn>
-                                            </DataGrid.Columns>
-                                        </DataGrid>
-                                    </StackPanel>
-                                </ScrollViewer>
-
+                                <Grid Margin="0,0,0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <ItemsControl Grid.Column="1" 
+                                                      ItemsSource="{ Binding ProjectPackage }">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,0,0,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{ Binding ProjectName }"></TextBlock>
+                                                    <TextBlock Text="{ Binding Version }"
+                                                                   Grid.Column="1"></TextBlock>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-
-                    </ListView>
-                </StackPanel>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Conflicts">
                 <Label Content="Content goes here... 3a" />
