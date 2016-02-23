@@ -27,8 +27,15 @@ namespace NugetCompare.UI
                                ex => NotifyError(ex.Message, ex)));
             }
         }
-        
-        public ICommand BrowseCommand => new DelegateCommand(Browse);
+
+        public ICommand BrowseCommand
+        {
+            get
+            {
+                return new DelegateCommand(Browse); 
+                
+            }
+        }
 
         private bool _scanning;
         public bool Scanning
