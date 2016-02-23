@@ -45,8 +45,7 @@
         <Label Content="Directory" />
         <TextBox Text="{Binding Path=Model.SearchDirectory}"
                  Grid.Row="0" 
-                 Grid.Column="1"
-                 controls:TextBoxHelper.ClearTextButton="True"
+                 Grid.Column="1" 
                  controls:TextBoxHelper.Watermark="Solution Directory" />
 
         <Button Style="{StaticResource AccentedSquareButtonStyle}"
