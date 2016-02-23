@@ -46,9 +46,10 @@
         <TextBox Text="{Binding Path=Model.SearchDirectory}"
                  Grid.Row="0" 
                  Grid.Column="1" 
+                 controls:TextBoxHelper.ClearTextButton="True"
                  controls:TextBoxHelper.Watermark="Solution Directory" />
 
-        <Button Style="{StaticResource  AccentedSquareButtonStyle }"
+        <Button Style="{StaticResource AccentedSquareButtonStyleB}"
                 Grid.Row="0" 
                 Grid.Column="3" 
                 Content="Browse" 
