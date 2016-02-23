@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Threading;
 using System.Windows.Input;
 using SimpleMvvmToolkit;
 
 namespace NugetCompare.UI
 {
-
     /// <summary>
     /// This class contains properties that a View can data bind to.
     /// <para>
@@ -15,8 +12,6 @@ namespace NugetCompare.UI
     /// </summary>
     public class SelectDiretoryViewModel : ViewModelDetailBase<SelectDiretoryViewModel, Setting>
     {
-
-
         public event EventHandler<NotificationEventArgs<Exception>> ErrorNotice;
         public event EventHandler<NotificationEventArgs> OpenBrowse;
 
@@ -32,10 +27,8 @@ namespace NugetCompare.UI
                                ex => NotifyError(ex.Message, ex)));
             }
         }
-
-
+        
         public ICommand BrowseCommand => new DelegateCommand(Browse);
-
 
         private bool _scanning;
         public bool Scanning
@@ -72,8 +65,7 @@ namespace NugetCompare.UI
             Model.Solutions = _packageService.GetSolutions(Model.SearchDirectory).ToObservableCollection();
             //Thread.Sleep(5000);
         }
-
-
+        
         private void ScanCompleted()
         {
             Scanning = false;
